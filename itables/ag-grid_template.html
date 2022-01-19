@@ -1,0 +1,16 @@
+<div id="table_id" class="ag-theme-alpine" style="height: 300px;width:100%;"></div>
+<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+<link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
+<script type="module">
+import { Grid } from "https://esm.sh/@ag-grid-community/core@26.2.0";
+import { ClientSideRowModelModule } from "https://esm.sh/@ag-grid-community/client-side-row-model@26.2.0";
+import { CsvExportModule } from "https://esm.sh/@ag-grid-community/csv-export@26.2.0";
+
+const columnDefs = [{ field: "0", headerName: "col"}];
+const rowData = [{ "0": "Value"}];
+
+const gridOptions = {columnDefs: columnDefs, rowData: rowData};
+
+let eGridDiv = document.querySelector('#table_id');
+new Grid(eGridDiv, gridOptions, { modules: [ClientSideRowModelModule, CsvExportModule] });
+</script>

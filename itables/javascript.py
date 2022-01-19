@@ -1,6 +1,7 @@
 """HTML/js representation of Pandas dataframes"""
 
 import io
+import itertools
 import json
 import logging
 import os
@@ -19,7 +20,7 @@ from .downsample import downsample
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 
-_DATATABLE_LOADED = False
+_JS_LIBRARY = "ag-grid"
 _ORIGINAL_DATAFRAME_REPR_HTML = pd.DataFrame._repr_html_
 
 
@@ -29,32 +30,32 @@ def read_package_file(*path):
         return fp.read()
 
 
-def init_notebook_mode(all_interactive=False):
+def init_notebook_mode(all_interactive=False, js_library=_JS_LIBRARY):
     """Load the datatables.net library and the corresponding css, and if desired (all_interactive=True),
     activate the datatables representation for all the Pandas DataFrames and Series.
 
     Make sure you don't remove the output of this cell, otherwise the interactive tables won't work when
     your notebook is reloaded.
     """
+    nonlocal _JS_LIBRARY
+    _JS_LIBRARY = check_js_library(js_library)
+
     if all_interactive:
-        pd.DataFrame._repr_html_ = _datatables_repr_
-        pd.Series._repr_html_ = _datatables_repr_
+        pd.DataFrame._repr_html_ = _interactive_table_repr_
+        pd.Series._repr_html_ = _interactive_table_repr_
     else:
         pd.DataFrame._repr_html_ = _ORIGINAL_DATAFRAME_REPR_HTML
         if hasattr(pd.Series, "_repr_html_"):
             del pd.Series._repr_html_
 
-    load_datatables(skip_if_already_loaded=False)
+    # TODO: remove this #51
+    if js_library == "datatables.net":
+        display(Javascript(read_package_file("require_config.js")))
 
 
-def load_datatables(skip_if_already_loaded=True):
-    global _DATATABLE_LOADED
-    if _DATATABLE_LOADED and skip_if_already_loaded:
-        return
-
-    display(Javascript(read_package_file("require_config.js")))
-
-    _DATATABLE_LOADED = True
+def check_js_library(js_library):
+    assert js_library in {"ag-grid", "datatables.net"}, js_library
+    return js_library
 
 
 def _formatted_values(df):
@@ -94,6 +95,16 @@ def _table_header(df, table_id, show_index, classes):
     return f'<table id="{table_id}" class="{classes}"><thead>{thead}</thead><tbody>{tbody}</tbody></table>'
 
 
+def _column_names(df, show_index):
+    """Return the column names"""
+    if show_index:
+        for name in df.index.names:
+            yield name
+
+    for column in df.columns:
+        yield column
+
+
 def eval_functions_dumps(obj):
     """
     This is a replacement for json.dumps that
@@ -125,7 +136,8 @@ def replace_value(template, pattern, value, count=1):
 
 
 def _datatables_repr_(df=None, tableId=None, **kwargs):
-    """Return the HTML/javascript representation of the table"""
+    """Return an HTML output with a datatables.net
+    representation of the table"""
 
     # Default options
     for option in dir(opt):
@@ -197,6 +209,71 @@ def _datatables_repr_(df=None, tableId=None, **kwargs):
     return output
 
 
+def _ag_grid_repr_(df=None, tableId=None, **kwargs):
+    """Return an HTML output with an ag-grid
+    representation of the table"""
+
+    # Default options
+    for option in dir(opt):
+        if option not in kwargs and not option.startswith("__"):
+            kwargs[option] = getattr(opt, option)
+
+    # These options are used here, not in DataTable
+    showIndex = kwargs.pop("showIndex")
+    maxBytes = kwargs.pop("maxBytes", 0)
+    maxRows = kwargs.pop("maxRows", 0)
+    maxColumns = kwargs.pop("maxColumns", pd.get_option("display.max_columns") or 0)
+    eval_functions = kwargs.pop("eval_functions", None)
+    if eval_functions is not None:
+        raise NotImplementedError("eval_functions is not implemented yet for ag-grid")
+
+    if isinstance(df, (np.ndarray, np.generic)):
+        df = pd.DataFrame(df)
+
+    if isinstance(df, pd.Series):
+        df = df.to_frame()
+
+    df = downsample(df, max_rows=maxRows, max_columns=maxColumns, max_bytes=maxBytes)
+
+    # Load the HTML template
+    output = read_package_file("ag-grid_template.html")
+
+    tableId = tableId or str(uuid.uuid4())
+
+    if showIndex == "auto":
+        showIndex = df.index.name is not None or not isinstance(df.index, pd.RangeIndex)
+
+    if not showIndex:
+        df = df.set_index(pd.RangeIndex(len(df.index)))
+
+    output = replace_value(output, "table_id", tableId, count=2)
+
+    gridOptions = kwargs
+    gridOptions["columnDefs"] = [
+        {"field": str(col_id), "headerName": col, "sortable": True, "filter": True}
+        for col_id, col in zip(
+            itertools.count(), _column_names(df, show_index=showIndex)
+        )
+    ]
+
+    # Export the table data to JSON and include this in the HTML
+    data = _formatted_values(df.reset_index() if showIndex else df)
+
+    # ag-grid wants a list of dict, not a list of lists like datatables.net
+    gridOptions["rowData"] = [
+        {col_id: value for col_id, value in zip(itertools.count(), row)} for row in data
+    ]
+
+    gridOptions = json.dumps(gridOptions)
+    output = replace_value(
+        output,
+        "const gridOptions = {columnDefs: columnDefs, rowData: rowData};",
+        f"const gridOptions = {gridOptions};",
+    )
+
+    return output
+
+
 def _any_function(value):
     """Does a value or nested value starts with 'function'?"""
     if isinstance(value, str) and value.lstrip().startswith("function"):
@@ -212,8 +289,18 @@ def _any_function(value):
     return False
 
 
-def show(df=None, **kwargs):
-    """Show a dataframe"""
-    html = _datatables_repr_(df, **kwargs)
-    load_datatables(skip_if_already_loaded=True)
+def _interactive_table_repr_(df, js_library=None, **kwargs):
+    if js_library is None:
+        js_library = _JS_LIBRARY
+
+    check_js_library(js_library)
+    if js_library == "ag-grid":
+        return _ag_grid_repr_(df, **kwargs)
+    if js_library == "datatables.net":
+        return _datatables_repr_(df, **kwargs)
+
+
+def show(df=None, js_library=None, **kwargs):
+    """Display a Pandas DataFrame (or a series, or a numpy array) as an interactive table"""
+    html = _interactive_table_repr_(df, js_library=js_library, **kwargs)
     display(HTML(html))
