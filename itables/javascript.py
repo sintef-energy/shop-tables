@@ -37,7 +37,7 @@ def init_notebook_mode(all_interactive=False, js_library=_JS_LIBRARY):
     Make sure you don't remove the output of this cell, otherwise the interactive tables won't work when
     your notebook is reloaded.
     """
-    nonlocal _JS_LIBRARY
+    global _JS_LIBRARY
     _JS_LIBRARY = check_js_library(js_library)
 
     if all_interactive:
@@ -224,8 +224,6 @@ def _ag_grid_repr_(df=None, tableId=None, **kwargs):
     maxRows = kwargs.pop("maxRows", 0)
     maxColumns = kwargs.pop("maxColumns", pd.get_option("display.max_columns") or 0)
     eval_functions = kwargs.pop("eval_functions", None)
-    if eval_functions is not None:
-        raise NotImplementedError("eval_functions is not implemented yet for ag-grid")
 
     if isinstance(df, (np.ndarray, np.generic)):
         df = pd.DataFrame(df)
@@ -248,27 +246,47 @@ def _ag_grid_repr_(df=None, tableId=None, **kwargs):
 
     output = replace_value(output, "table_id", tableId, count=2)
 
-    gridOptions = kwargs
-    gridOptions["columnDefs"] = [
+    if eval_functions:
+        gridOptions = eval_functions_dumps(kwargs)
+    else:
+        gridOptions = json.dumps(kwargs)
+        if eval_functions is None and _any_function(kwargs):
+            warnings.warn(
+                "One of the arguments passed to ag-grid starts with 'function'. "
+                "To evaluate this function, use the option 'eval_functions=True'. "
+                "To silence this warning, use 'eval_functions=False'."
+            )
+
+    output = replace_value(
+        output,
+        "let gridOptions = {};",
+        f"let gridOptions = {gridOptions};",
+    )
+
+    columnsDefs = [
         {"field": str(col_id), "headerName": col, "sortable": True, "filter": True}
         for col_id, col in zip(
             itertools.count(), _column_names(df, show_index=showIndex)
         )
     ]
+    output = replace_value(
+        output,
+        'const columnDefs = [{ field: "0", headerName: "col"}];',
+        f"const columnDefs = {json.dumps(columnsDefs)};",
+    )
 
     # Export the table data to JSON and include this in the HTML
     data = _formatted_values(df.reset_index() if showIndex else df)
 
     # ag-grid wants a list of dict, not a list of lists like datatables.net
-    gridOptions["rowData"] = [
+    rowData = [
         {col_id: value for col_id, value in zip(itertools.count(), row)} for row in data
     ]
 
-    gridOptions = json.dumps(gridOptions)
     output = replace_value(
         output,
-        "const gridOptions = {columnDefs: columnDefs, rowData: rowData};",
-        f"const gridOptions = {gridOptions};",
+        'const rowData = [{ "0": "Value"}];',
+        f"const rowData = {json.dumps(rowData)};",
     )
 
     return output

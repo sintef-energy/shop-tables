@@ -9,7 +9,9 @@ import { CsvExportModule } from "https://esm.sh/@ag-grid-community/csv-export@26
 const columnDefs = [{ field: "0", headerName: "col"}];
 const rowData = [{ "0": "Value"}];
 
-const gridOptions = {columnDefs: columnDefs, rowData: rowData};
+let gridOptions = {};
+gridOptions["columnDefs"] = columnDefs;
+gridOptions["rowData"] = rowData;
 
 let eGridDiv = document.querySelector('#table_id');
 new Grid(eGridDiv, gridOptions, { modules: [ClientSideRowModelModule, CsvExportModule] });
