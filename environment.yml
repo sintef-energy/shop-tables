@@ -11,17 +11,26 @@ dependencies:
   - nbconvert
   - ipykernel
   - pandas
+  # Pytest
   - pytest
   - pytest-xdist
   - pytest-cov
+  # Pre-commit & code quality
   - pre-commit
   - pylint
   - flake8
   - black
   - isort
+  # Jupyter Lab extension
+  - cookiecutter
+  - nodejs
+  - jupyter-packaging
+  # Build
   - pip
   - setuptools
   - twine
+  - build
+  # Docs
   - ghp-import
   - pip:
     - world_bank_data
