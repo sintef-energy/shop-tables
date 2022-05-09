@@ -15,7 +15,3 @@ tags = ""
 
 """Maximum bytes for displaying a table"""
 maxBytes = 2**16
-
-"""Maximum number of rows or columns"""
-# maxRows = 10000
-# maxColumns = 1000

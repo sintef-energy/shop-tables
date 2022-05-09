@@ -1,10 +1,4 @@
 <table id="table_id"><thead><tr><th>A</th></tr></thead></table>
-<!-- In Jupyter Lab, static files are provided by the jupyterlab-itables extension.
- TODO: When the extension is not available we have to load the css and libraries from the internet.
- -->
-<script src="/static/itables/jquery/dist/jquery.js"></script>
-<script src="/static/itables/datatables.net/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" href="/static/itables/datatables.net-dt/css/jquery.dataTables.min.css">
 <style> table td {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -14,31 +8,63 @@
     overflow: hidden;
 } </style>
 <script type="module">
+    // This function loads a script in the document header,
+    // after making sure that the script has not been loaded yet.
+    // Inspired by https://stackoverflow.com/a/71209306
+    const loadScript = (url, callback) => {
+    let script;
+    const scripts = Array.from(document.querySelectorAll('script'));
+    const existingScript = scripts.find((script) => script.src === url);
+    if (existingScript) {
+        script = existingScript;
+    } else {
+        script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = url;
+        document.head.appendChild(script);
+    }
+
+    if (script.readyState) {
+        script.onreadystatechange = () => {
+            if (script.readyState === 'loaded' || script.readyState === 'complete') {
+                script.onreadystatechange = null;
+                callback();
+            }
+        };
+    } else {
+        script.onload = callback;
+    }
+};
+
+    // This function adds the datatables CSS to the HTML header
+    const loadStyle = (url) => {
+    let style;
+    const styles = Array.from(document.querySelectorAll('link'));
+    const existingStyle = styles.find((style) => style.href === url);
+    if (!existingStyle)  {
+        style = document.createElement('link');
+        style.rel = 'stylesheet';
+        style.type = 'text/css';
+        style.href = url;
+        document.head.appendChild(style);
+    }
+};
+
     // Define the table data
     const data = [];
 
-    if (typeof require === 'undefined') {
-        // Define the dt_args
-        let dt_args = {};
-        dt_args["data"] = data;
+    // Define the dt_args
+    let dt_args = {};
+    dt_args["data"] = data;
 
-        let $ = jQuery;
+    // Display the table
+    const display = () => {
+    $(document).ready(function () {
+        $('#table_id').DataTable(dt_args);
+    });
+    };
 
-        // Display the table
-        $(document).ready(function () {
-            $('#table_id').DataTable(dt_args);
-        });
-    } else {
-        require(["jquery", "datatables"], ($, datatables) => {
-                // Define the dt_args
-                let dt_args = {};
-                dt_args["data"] = data;
-
-                // Display the table
-                $(document).ready(function () {
-                    $('#table_id').DataTable(dt_args);
-                });
-            }
-        )
-    }
+    loadStyle("/static/itables/datatables.net-dt/css/jquery.dataTables.min.css");
+    loadScript('/static/itables/jquery/dist/jquery.js', () =>
+        loadScript('/static/itables/datatables.net/js/jquery.dataTables.js', display));
 </script>
