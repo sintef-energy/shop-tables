@@ -105,11 +105,11 @@ def eval_functions_dumps(obj):
     return json.dumps(obj)
 
 
-def replace_value(template, pattern, value, count=1):
+def replace_value(template, pattern, value):
     """Set the given pattern to the desired value in the template,
     after making sure that the pattern is found exactly once."""
     assert isinstance(template, str)
-    assert template.count(pattern) == count
+    assert template.count(pattern) == 1
     return template.replace(pattern, value)
 
 
@@ -162,7 +162,7 @@ def _datatables_repr_(df=None, tableId=None, **kwargs):
         '<table id="table_id"><thead><tr><th>A</th></tr></thead></table>',
         table_header,
     )
-    output = replace_value(output, "#table_id", f"#{tableId}", count=2)
+    output = replace_value(output, "#table_id", f"#{tableId}")
 
     # Export the DT args to JSON
     if eval_functions:
@@ -176,9 +176,7 @@ def _datatables_repr_(df=None, tableId=None, **kwargs):
                 "To silence this warning, use 'eval_functions=False'."
             )
 
-    output = replace_value(
-        output, "let dt_args = {};", f"let dt_args = {dt_args};", count=2
-    )
+    output = replace_value(output, "let dt_args = {};", f"let dt_args = {dt_args};")
 
     # Export the table data to JSON and include this in the HTML
     data = _formatted_values(df.reset_index() if showIndex else df)
