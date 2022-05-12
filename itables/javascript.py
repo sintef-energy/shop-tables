@@ -162,12 +162,31 @@ def _datatables_repr_(df=None, tableId=None, **kwargs):
         '<table id="table_id"><thead><tr><th>A</th></tr></thead></table>',
         table_header,
     )
-    output = replace_value(output, "#table_id", f"#{tableId}", count=2)
+    output = replace_value(output, "#table_id", f"#{tableId}", count=5)
 
     # Export the DT args to JSON
     if eval_functions:
         dt_args = eval_functions_dumps(kwargs)
     else:
+        # dt_args = 
+        # '''
+        # {
+        # initComplete: function () {
+        #     // Apply the search
+        #     this.api().columns().every( function () {
+        #         var that = this;
+ 
+        #         $( 'input', this.footer() ).on( 'keyup change clear', function () {
+        #             if ( that.search() !== this.value ) {
+        #                 that
+        #                     .search( this.value )
+        #                     .draw();
+        #                 }
+        #             } );
+        #         } );
+        #     }
+        # }
+        # '''
         dt_args = json.dumps(kwargs)
         if eval_functions is None and _any_function(kwargs):
             warnings.warn(

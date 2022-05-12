@@ -28,7 +28,23 @@
 
         // Display the table
         $(document).ready(function () {
-            $('#table_id').DataTable(dt_args);
+            // Setup - add a text input to each footer cell
+            $('#table_id thead th').each( function () {
+                var title = $('#table_id thead th').eq( $(this).index() ).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            } );
+
+            var table = $('#table_id').DataTable(dt_args);
+            
+            // Apply the search
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                $( 'input', table.column( colIdx ).header() ).on( 'keyup change', function () {
+                    table
+                        .column( colIdx )
+                        .search( this.value )
+                        .draw();
+                } );
+            } );
         });
     } else {
         require(["jquery", "datatables"], ($, datatables) => {
@@ -38,7 +54,11 @@
 
                 // Display the table
                 $(document).ready(function () {
-                    $('#table_id').DataTable(dt_args);
+                    $('#table_id tfoot th').each( function () {
+                        var title = $(this).text();
+                        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+                    } );
+                    //$('#table_id').DataTable(dt_args);
                 });
             }
         )
