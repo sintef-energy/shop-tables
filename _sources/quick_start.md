@@ -5,7 +5,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.11.5
+    jupytext_version: 1.13.8
 kernelspec:
   display_name: itables
   language: python
@@ -34,7 +34,7 @@ pip install itables
 
 Activate the interactive mode for all series and dataframes with
 
-```{code-cell} ipython3
+```{code-cell}
 from itables import init_notebook_mode
 
 init_notebook_mode(all_interactive=True)
@@ -42,7 +42,7 @@ init_notebook_mode(all_interactive=True)
 
 After this, any Pandas object (DataFrame or Series) is displayed as an interactive [datatables.net](https://datatables.net/) table, which lets you explore, filter or sort your data.
 
-```{code-cell} ipython3
+```{code-cell}
 from itables.sample_dfs import get_countries
 
 df = get_countries()
@@ -51,7 +51,7 @@ df
 
 If you prefer to render just one series or dataframe as an interactive table, use `show`:
 
-```{code-cell} ipython3
+```{code-cell}
 from itables import show
 from itables.sample_dfs import get_population
 
@@ -59,7 +59,14 @@ x = get_population()
 show(x)
 ```
 
-(NB: In Jupyter Notebook, Jupyter NBconvert and Jupyter Book, you need to call `init_notebook_mode()` before using `show`).
+## Offline mode
+
+Since `itables==1.0.0`, the [jquery](https://jquery.com/) and [datatables.net](https://datatables.net/) libraries and CSS
+are injected in the notebook when you execute `init_notebook_mode` with its default argument `connected=False`.
+Thanks to this the interactive tables will work even without a connection to the internet.
+
+If you prefer to load the libraries dynamically (and keep the notebook lighter), use `connected=True` when you
+execute `init_notebook_mode`.
 
 ## Advanced parameters
 

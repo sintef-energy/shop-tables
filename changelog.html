@@ -1,0 +1,728 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>ITables ChangeLog &#8212; Interactive Tables</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Interactive Tables</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="quick_start.html">
+                    Interactive Tables
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="supported_editors.html">
+   Supported Notebook Editors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="advanced_parameters.html">
+   Advanced parameters
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="downsampling.html">
+   Downsampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sample_dataframes.html">
+   Sample dataframes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="developing.html">
+   Developing ITables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   ITables ChangeLog
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/changelog.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   1.1.2 (2022-06-30)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   1.1.1 (2022-06-23)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   1.1.0 (2022-06-23)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   1.0.0 (2022-06-22)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   0.4.7 (2022-04-13)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   0.4.6 (2022-03-29)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   0.4.5 (2022-01-25)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   0.4.4 (2022-01-10)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   0.4.3 (2022-01-08)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   0.4.2 (2022-01-07)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   0.4.1 (2022-01-06)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   0.4.0 (2022-01-06)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   0.3.1 (2021-12-24)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id14">
+   0.3.0 (2020-12-14)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   0.2.2 (2020-10-01)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id16">
+   0.2.1 (2019-11-21)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id17">
+   0.2.0 (2019-11-20)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id18">
+   0.1.0 (2019-04-23)
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>ITables ChangeLog</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   1.1.2 (2022-06-30)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   1.1.1 (2022-06-23)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   1.1.0 (2022-06-23)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   1.0.0 (2022-06-22)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   0.4.7 (2022-04-13)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   0.4.6 (2022-03-29)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   0.4.5 (2022-01-25)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   0.4.4 (2022-01-10)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   0.4.3 (2022-01-08)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   0.4.2 (2022-01-07)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   0.4.1 (2022-01-06)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   0.4.0 (2022-01-06)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   0.3.1 (2021-12-24)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id14">
+   0.3.0 (2020-12-14)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   0.2.2 (2020-10-01)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id16">
+   0.2.1 (2019-11-21)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id17">
+   0.2.0 (2019-11-20)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id18">
+   0.1.0 (2019-04-23)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="itables-changelog">
+<h1>ITables ChangeLog<a class="headerlink" href="#itables-changelog" title="Permalink to this headline">#</a></h1>
+<section id="id1">
+<h2>1.1.2 (2022-06-30)<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p><strong>Changed</strong></p>
+<ul class="simple">
+<li><p>Tables with many rows are preferentially downsampled on rows, while tables with many columns are preferentially downsampled on columns (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/84">#84</a>)</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>1.1.1 (2022-06-23)<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p><strong>Fixed</strong></p>
+<ul class="simple">
+<li><p>Added missing <code class="docutils literal notranslate"><span class="pre">column_filters</span></code> package data.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>1.1.0 (2022-06-23)<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p><strong>Added</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">itables.options</span></code> and the <code class="docutils literal notranslate"><span class="pre">show</span></code> function have a new <code class="docutils literal notranslate"><span class="pre">column_filters</span></code> argument to display individual column search boxes (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/69">#69</a>)</p></li>
+<li><p>We have documented DataTables’ <code class="docutils literal notranslate"><span class="pre">dom</span></code> option.</p></li>
+<li><p>We have introduced a new class <code class="docutils literal notranslate"><span class="pre">JavascriptFunction</span></code> to limit the evaluation of Javascript function to selected ones.</p></li>
+<li><p>The documentation is formatted with <code class="docutils literal notranslate"><span class="pre">black</span></code> thanks to a Jupytext &amp; Black pre-commit hook.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>1.0.0 (2022-06-22)<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p><strong>Added</strong></p>
+<ul class="simple">
+<li><p>ITables works offline! (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/8">#8</a>, <a class="reference external" href="https://github.com/mwouts/jupytext/issues/70">#70</a>). Marc would like to thank
+<a class="reference external" href="https://sprymedia.co.uk/">Allan Jardine</a>, the author of the <a class="reference external" href="https://datatables.net/">datatables</a> library,
+and <a class="reference external" href="https://github.com/fwouts">François Wouts</a> for their precious help on the subject.</p></li>
+</ul>
+<p><strong>Changed</strong></p>
+<ul class="simple">
+<li><p>ITables uses the ESM version 1.12.1 of <a class="reference external" href="http://datatables.net">datatables.net</a></p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>0.4.7 (2022-04-13)<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p><strong>Added</strong></p>
+<ul class="simple">
+<li><p>Additional <code class="docutils literal notranslate"><span class="pre">tags</span></code> like e.g. captions are supported (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/10">#10</a>).</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>0.4.6 (2022-03-29)<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<p><strong>Changed</strong></p>
+<ul class="simple">
+<li><p>We have removed the default column width at 70 pixels (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/61">#61</a>, <a class="reference external" href="https://github.com/mwouts/jupytext/issues/62">#62</a>, <a class="reference external" href="https://github.com/mwouts/jupytext/issues/66">#66</a>)</p></li>
+<li><p>We now use <code class="docutils literal notranslate"><span class="pre">pyupgrade</span></code> in our pre-commit hooks</p></li>
+</ul>
+<p><strong>Fixed</strong></p>
+<ul class="simple">
+<li><p>We have improved the rendering of multiindex columns (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/63">#63</a>)</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2>0.4.5 (2022-01-25)<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<p><strong>Changed</strong></p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">itables</span></code> documentation now uses Jupyter Book (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/56">#56</a>)</p></li>
+<li><p>We have added a new <code class="docutils literal notranslate"><span class="pre">style</span></code> option in <code class="docutils literal notranslate"><span class="pre">itables.options</span></code> and in <code class="docutils literal notranslate"><span class="pre">show</span></code>, with a default value equal to <code class="docutils literal notranslate"><span class="pre">max-width:100%</span></code>.</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>0.4.4 (2022-01-10)<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<p><strong>Fixed</strong></p>
+<ul class="simple">
+<li><p>Add ‘require_config.js’ to the pip package (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/48">#48</a>)</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>0.4.3 (2022-01-08)<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
+<p><strong>Changed</strong></p>
+<ul class="simple">
+<li><p>When a JS function is created on the Python side, we export it as-is (without quotes) in the HTML file and don’t use JS eval anymore.</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>0.4.2 (2022-01-07)<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<p><strong>Fixed</strong></p>
+<ul class="simple">
+<li><p>Fix the HTML output when <code class="docutils literal notranslate"><span class="pre">eval_functions=True</span></code></p></li>
+<li><p>Display “Loading…” under the table header until the table is displayed with <a class="reference external" href="http://datatables.net">datatables.net</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">init_notebook_mode(all_interactive=False)</span></code> restores the original Pandas HTML representation.</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>0.4.1 (2022-01-06)<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
+<p><strong>Fixed</strong></p>
+<ul class="simple">
+<li><p>Long column names don’t overlap anymore (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/28">#28</a>)</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2>0.4.0 (2022-01-06)<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
+<p>r<strong>Fixed</strong></p>
+<ul class="simple">
+<li><p>Now <code class="docutils literal notranslate"><span class="pre">itables</span></code> also works in Jupyter Lab, Colab, VS Code and PyCharm (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/3">#3</a>, <a class="reference external" href="https://github.com/mwouts/jupytext/issues/4">#4</a>, <a class="reference external" href="https://github.com/mwouts/jupytext/issues/26">#26</a>, <a class="reference external" href="https://github.com/mwouts/jupytext/issues/40">#40</a>), as we load the <code class="docutils literal notranslate"><span class="pre">datatables.net</span></code> library with an ES import when <code class="docutils literal notranslate"><span class="pre">require.js</span></code> is not available. Many thanks to <a class="reference external" href="https://github.com/fwouts">François Wouts</a> for his precious help!</p></li>
+</ul>
+<p><strong>Changed</strong></p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">show</span></code> function (and <code class="docutils literal notranslate"><span class="pre">itables.options</span></code>) has a new argument <code class="docutils literal notranslate"><span class="pre">eval_functions</span></code>. When set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the nested strings passed to <code class="docutils literal notranslate"><span class="pre">datatables.net</span></code> that start with <code class="docutils literal notranslate"><span class="pre">function</span></code> are converted to Javascript functions.</p></li>
+<li><p>The HTML code for the <a class="reference external" href="http://datatables.net">datatables.net</a> representation of the table is generated with an HTML template.</p></li>
+<li><p>We use f-strings and thus require Python &gt;= 3.6</p></li>
+</ul>
+</section>
+<section id="id13">
+<h2>0.3.1 (2021-12-24)<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h2>
+<p><strong>Fixed</strong></p>
+<ul class="simple">
+<li><p>We fixed an issue (<code class="docutils literal notranslate"><span class="pre">jquery</span></code> not found) with the HTML export when using <code class="docutils literal notranslate"><span class="pre">nbconvert&gt;=6.0</span></code> (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/21">#21</a>)</p></li>
+<li><p>We documented how to change the default ordering of rows - with the <code class="docutils literal notranslate"><span class="pre">order</span></code> option (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/30">#30</a>)</p></li>
+<li><p>We documented how to load <code class="docutils literal notranslate"><span class="pre">require</span></code> in Jupyter Lab (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/3">#3</a>)</p></li>
+</ul>
+<p><strong>Changed</strong></p>
+<ul class="simple">
+<li><p>The main branch for the project is <code class="docutils literal notranslate"><span class="pre">main</span></code> rather than <code class="docutils literal notranslate"><span class="pre">master</span></code></p></li>
+<li><p>Updated <code class="docutils literal notranslate"><span class="pre">datatables</span></code> to 1.11.3 and <code class="docutils literal notranslate"><span class="pre">jquery</span></code> to 3.5.1</p></li>
+</ul>
+</section>
+<section id="id14">
+<h2>0.3.0 (2020-12-14)<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h2>
+<p><strong>Fixed</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">itables</span></code> now has an explicit <code class="docutils literal notranslate"><span class="pre">init_notebook_mode</span></code> function, which inserts the <a class="reference external" href="http://datatables.net">datatables.net</a> library in the notebook. Use <code class="docutils literal notranslate"><span class="pre">init_notebook_mode(all_interactive=True)</span></code> to display all the pandas object as interactive tables. This fixes (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/6">#6</a>) and (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/17">#17</a>).</p></li>
+</ul>
+<p><strong>Changed</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">itables</span></code> uses GitHub Actions for the CI.</p></li>
+</ul>
+<p><strong>Added</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">itables</span></code> is tested with Python 3.9 as well.</p></li>
+</ul>
+</section>
+<section id="id15">
+<h2>0.2.2 (2020-10-01)<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h2>
+<p><strong>Fixed</strong></p>
+<ul class="simple">
+<li><p>Pandas’ <code class="docutils literal notranslate"><span class="pre">display.max_columns</span></code> can be <code class="docutils literal notranslate"><span class="pre">None</span></code>, by Arthur Deygin (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/14">#14</a>)</p></li>
+</ul>
+</section>
+<section id="id16">
+<h2>0.2.1 (2019-11-21)<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h2>
+<p><strong>Added</strong></p>
+<ul class="simple">
+<li><p>Animated screenshot in README</p></li>
+</ul>
+<p><strong>Fixed</strong></p>
+<ul class="simple">
+<li><p>Add IPython to <a class="reference external" href="http://setup.py">setup.py</a> install_requires, by Jon Shao (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/9">#9</a>)</p></li>
+</ul>
+</section>
+<section id="id17">
+<h2>0.2.0 (2019-11-20)<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h2>
+<p><strong>Added</strong></p>
+<ul class="simple">
+<li><p>Large tables are downsampled (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/2">#2</a>)</p></li>
+</ul>
+<p><strong>Changed</strong></p>
+<ul class="simple">
+<li><p>Javascript code moved to Javascript files</p></li>
+</ul>
+<p><strong>Fixed</strong></p>
+<ul class="simple">
+<li><p>Tables with many columns are now well rendered (<a class="reference external" href="https://github.com/mwouts/jupytext/issues/5">#5</a>)</p></li>
+</ul>
+</section>
+<section id="id18">
+<h2>0.1.0 (2019-04-23)<a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h2>
+<p>Initial release</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="troubleshooting.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Troubleshooting</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Marc Wouts<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
